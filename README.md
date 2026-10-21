@@ -25,7 +25,7 @@
 - `src/server/` — транскрипт-проверка, состояние, инструкция модели.
 - `src/rpc.ts` — строгий RPC-контракт между TUI и сервером.
 - `tests/` — 13 тестов (парсер, изоляция, идентичность, E2E телеметрии).
-- `.host-test/` — изолированная среда проверки на реальном хосте (не для коммитов; см. `HOST-VALIDATION.md`).
+- `.host-test/` — изолированная среда проверки на реальном хосте (не для коммитов).
 
 ## Установка и проверка
 
@@ -40,7 +40,11 @@ npm test
 
 `npm test` запускает Vitest под `node_modules/node/bin/node`, чтобы тесты использовали Node с `node:ffi`. Обычные команды Node в системе не изменяются.
 
-Результаты проверки на реальном OpenCode 2.0.28 (PTY, локальный детерминированный провайдер): `HOST-VALIDATION.md`.
+
+
+## Релизы
+
+Conventional Commits + [release-please](https://github.com/googleapis/release-please): пуш в `main` открывает релизный PR (CHANGELOG, версия); тесты запускаются на релизном PR и на релизном коммите (Node 26 для нативного FFI OpenTUI). Слияние релизного PR создаёт тег и GitHub Release. Типы коммитов: `feat:` → minor, `fix:` → patch, `feat!:`/`BREAKING CHANGE:` → major.
 
 ## Подключение
 

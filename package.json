@@ -1,6 +1,6 @@
 {
 	"name": "opencode-stretch",
-	"version": "0.0.0-spike",
+	"version": "1.0.0",
 	"description": "OpenCode 2.0.28 native stretch renderer compatibility spike",
 	"scripts": {
 		"lint": "biome check",
