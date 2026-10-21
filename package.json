@@ -24,21 +24,16 @@
 		"tui.ts",
 		"README.md",
 		"UPSTREAM.md",
-		"licenses",
-		"release-please-config.json",
-		".release-please-manifest.json"
+		"licenses"
 	],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/rvboris/opencode-stretch.git"
 	},
-	"dependencies": {
-		"@opencode/plugin": "2.0.28",
-		"@opentui/core": "0.5.17",
-		"@opentui/solid": "0.5.17",
-		"@types/node": "24.6.0",
-		"solid-js": "1.9.12",
-		"typescript": "5.9.3"
+	"exports": {
+		".": "./src/index.ts",
+		"./tui": "./tui.ts",
+		"./rpc": "./src/rpc.ts"
 	},
 	"dependencies": {
 		"@opencode/plugin": "2.0.28",
@@ -55,11 +50,6 @@
 	},
 	"allowScripts": {
 		"node@26.12.0": true
-	},
-	"exports": {
-		".": "./src/index.ts",
-		"./tui": "./tui.ts",
-		"./rpc": "./src/rpc.ts"
 	},
 	"publishConfig": {
 		"access": "public"

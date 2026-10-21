@@ -54,11 +54,11 @@ export default Plugin.define({
 						.then((fs) =>
 							fs.appendFileSync(
 								process.env.STRETCH_DEBUG!,
-								JSON.stringify({
+								`${JSON.stringify({
 									event,
 									value: value instanceof Error ? String(value) : value,
 									at: Date.now(),
-								}) + '\n',
+								})}\n`,
 							),
 						)
 						.catch(() => {});
@@ -83,8 +83,7 @@ export default Plugin.define({
 				stopped,
 			});
 			if (
-				!verified ||
-				!verified.keys.has(fragment) ||
+				!verified?.keys.has(fragment) ||
 				stopped ||
 				scopeKey(sessionLocation(view.sessionID)) !== scopeKey(verified.location)
 			)

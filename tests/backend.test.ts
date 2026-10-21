@@ -17,7 +17,7 @@ const user = (id: string): SessionMessageInfo => ({
 	time: { created: 1 },
 });
 const block = (token: string, label = 'one', body = '{{short|long}}') =>
-	'```stretch\nv1 ' + token + ' ' + label + '\n' + body + '\n```';
+	`\`\`\`stretch\nv1 ${token} ${label}\n${body}\n\`\`\``;
 const assistant = (
 	id: string,
 	text: string,
@@ -136,7 +136,7 @@ test('E2E telemetry, continuation and restart freeze snapshot; prior turns stay 
 		id[index] = index === 6 ? 99 : 'wrong';
 		expect(await h.open(JSON.stringify(id))).toEqual({ recorded: false });
 	}
-	expect(await h.open(r.identity + 'suffix')).toEqual({ recorded: false });
+	expect(await h.open(`${r.identity}suffix`)).toEqual({ recorded: false });
 	expect((await h.resolve(t, 'one', 'other')).valid).toBe(false);
 });
 
@@ -150,7 +150,7 @@ test('sessions isolate identical user IDs, incomplete/error/duplicate replies re
 	expect(t).not.toBe(other);
 	h.sessions.get('s')!.push(assistant('r', block(t), NaN));
 	expect((await h.resolve(t)).valid).toBe(false);
-	h.sessions.set('s', [user('A'), assistant('r', block(t) + '\n' + block(t))]);
+	h.sessions.set('s', [user('A'), assistant('r', `${block(t)}\n${block(t)}`)]);
 	expect((await h.resolve(t)).valid).toBe(false);
 	h.sessions.set('s', [user('A'), assistant('r', block(t).slice(0, -3))]);
 	expect((await h.resolve(t)).valid).toBe(false);
@@ -238,8 +238,8 @@ test('parser structural keys, limits, literals and fence scanner', () => {
 	expect(() => parse('{{x|'.repeat(17) + '}}'.repeat(17))).toThrow();
 	expect(parseStretchPayload('v1 abcdefgh one\n{{x|unclosed')).toBeUndefined();
 	const fenced = block('abcdefgh');
-	expect(extractStretchBlocks('before\n' + fenced + '\nafter\n' + fenced)).toHaveLength(2);
-	expect(extractStretchBlocks('````js\n' + fenced + '\n````')).toHaveLength(0);
+	expect(extractStretchBlocks(`before\n${fenced}\nafter\n${fenced}`)).toHaveLength(2);
+	expect(extractStretchBlocks(`\`\`\`\`js\n${fenced}\n\`\`\`\``)).toHaveLength(0);
 	expect(extractStretchBlocks('````stretch\nv1 abcdefgh one\n{{x|y}}\n```\n````')).toHaveLength(0);
 	expect(extractStretchBlocks('````stretch\nv1 abcdefgh one\n{{x|y}}\n````')).toHaveLength(1);
 	expect(extractStretchBlocks('~~~stretch\nv1 abcdefgh one\n{{x|y}}\n```')).toHaveLength(0);

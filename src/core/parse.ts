@@ -80,7 +80,7 @@ export function parse(text: string): Segment[] {
 			continue;
 		}
 		if (text.startsWith('}}', i)) {
-			if (!frame || !frame.stretch.short.trim() || frame.stretch.long === undefined)
+			if (!frame?.stretch.short.trim() || frame.stretch.long === undefined)
 				throw new Error('Invalid closing stretch');
 			frame.stretch.isClosed = true;
 			stack.pop();

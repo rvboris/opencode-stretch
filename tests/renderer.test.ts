@@ -7,7 +7,7 @@ import plugin, { parseAgreedBlock } from '../src/tui';
 
 const detail = 'Extra detail that should wrap cleanly in a narrow terminal without a fixed width.';
 const source = (text: string) =>
-	'```stretch\nv1 tokentoken123 b1\n{{short explanation|' + text + '}}\n```';
+	`\`\`\`stretch\nv1 tokentoken123 b1\n{{short explanation|${text}}}\n\`\`\``;
 test('native mouse hit testing, wrapping, recreation, disposal with agreed format', async () => {
 	const t = await createTestRenderer({ width: 32, height: 20 });
 	let open = false;
@@ -54,7 +54,7 @@ test('native mouse hit testing, wrapping, recreation, disposal with agreed forma
 		t.resize(16, 30);
 		await t.renderOnce();
 		expect(t.captureCharFrame()).toContain('Extra detail');
-		markdown.content = source(detail + ' More streamed text.');
+		markdown.content = source(`${detail} More streamed text.`);
 		await t.renderOnce();
 		expect(created).toBeGreaterThan(1);
 		expect(destroyed).toBe(created - 1);
@@ -121,7 +121,7 @@ test('TUI resolves asynchronously, queues local opens and cleans subscriptions',
 	const segment = parseStretchPayload(text)!.segments.find((s) => typeof s !== 'string')!;
 	if (typeof segment === 'string') throw new Error('Expected parsed fragment');
 	const stretchKey = segment.key;
-	let callback: any;
+	let callback: (token: { text: string }) => unknown;
 	let listener: (() => void) | undefined;
 	let resolveReply: (value: unknown) => void = () => {};
 	const records: unknown[] = [];
@@ -133,7 +133,7 @@ test('TUI resolves asynchronously, queues local opens and cleans subscriptions',
 		{
 			id: 'm1',
 			type: 'assistant',
-			content: [{ type: 'text', text: '```stretch\n' + text + '\n```' }],
+			content: [{ type: 'text', text: `\`\`\`stretch\n${text}\n\`\`\`` }],
 		},
 	];
 	const api = {
@@ -172,7 +172,7 @@ test('TUI resolves asynchronously, queues local opens and cleans subscriptions',
 			},
 		},
 	};
-	const cleanup = await plugin.setup(api as any);
+	const cleanup = await plugin.setup(api as Parameters<typeof plugin.setup>[0]);
 	try {
 		const block = callback({ text });
 		expect(block).toBeDefined();

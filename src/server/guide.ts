@@ -7,14 +7,14 @@ export function guideForTurn(token: string, feedback: string[]): string {
 		'A stretch block is a fenced code block tagged stretch. Its first line is exactly: v1 ' +
 			token +
 			' <blockLabel>',
-		'- Copy the turn token ' + token + ' verbatim; it is single-use for this turn.',
+		`- Copy the turn token ${token} verbatim; it is single-use for this turn.`,
 		'- blockLabel: distinct per block in this turn (letters, digits, underscore, hyphen).',
 		'- Body grammar: {{short|long}} — the reader sees the short form as a clickable line; the long form appears when clicked. Long forms may contain nested {{short|long}}.',
 		'- Close every brace pair and fence.',
 		'',
 		'Example:',
 		'```stretch',
-		'v1 ' + token + ' b1',
+		`v1 ${token} b1`,
 		'Deploy {{passed on the first try|passed on the first try: the migration rewrote 3 tables atomically and rollback was never needed because the shadow table precomputed all defaults]}}.',
 		'```',
 		'(Replace the example body with real content; keep the header shape.)',
