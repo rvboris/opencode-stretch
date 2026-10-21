@@ -44,7 +44,7 @@ npm test
 
 ## Релизы
 
-Conventional Commits + [release-please](https://github.com/googleapis/release-please): пуш в `main` открывает релизный PR (CHANGELOG, версия); тесты запускаются на релизном PR и на релизном коммите (Node 26 для нативного FFI OpenTUI). Слияние релизного PR создаёт тег и GitHub Release. Типы коммитов: `feat:` → minor, `fix:` → patch, `feat!:`/`BREAKING CHANGE:` → major.
+Conventional Commits + [release-please](https://github.com/googleapis/release-please): пуш в `main` открывает релизный PR (CHANGELOG, версия); тесты запускаются на релизном PR и на релизном коммите (Node 26 для нативного FFI OpenTUI). Слияние релизного PR создаёт тег, GitHub Release и публикует пакет `@rvboris/opencode-stretch` в npm (trusted publishing, `--provenance`). Типы коммитов: `feat:` → minor, `fix:` → patch, `feat!:`/`BREAKING CHANGE:` → major.
 
 ## Подключение
 

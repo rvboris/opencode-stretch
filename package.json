@@ -1,17 +1,37 @@
 {
-	"name": "opencode-stretch",
+	"name": "@rvboris/opencode-stretch",
 	"version": "1.0.0",
-	"description": "OpenCode 2.0.28 native stretch renderer compatibility spike",
+	"description": "cc-stretch adaptation for OpenCode 2 — inline expandable replies with read telemetry",
 	"scripts": {
 		"lint": "biome check",
 		"format": "biome format --write",
 		"test": "node_modules/node/bin/node node_modules/vitest/vitest.mjs run",
 		"typecheck": "tsc --noEmit"
 	},
-	"keywords": [],
-	"author": "",
+	"keywords": [
+		"opencode",
+		"opencode-plugin",
+		"cc-stretch",
+		"stretch",
+		"tui"
+	],
+	"author": "rvboris",
 	"license": "MIT",
 	"type": "module",
+	"files": [
+		"src",
+		"index.ts",
+		"tui.ts",
+		"README.md",
+		"UPSTREAM.md",
+		"licenses",
+		"release-please-config.json",
+		".release-please-manifest.json"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/rvboris/opencode-stretch.git"
+	},
 	"dependencies": {
 		"@opencode/plugin": "2.0.28",
 		"@opentui/core": "0.5.17",
@@ -20,11 +40,13 @@
 		"solid-js": "1.9.12",
 		"typescript": "5.9.3"
 	},
-	"private": true,
-	"exports": {
-		".": "./src/index.ts",
-		"./tui": "./tui.ts",
-		"./rpc": "./src/rpc.ts"
+	"dependencies": {
+		"@opencode/plugin": "2.0.28",
+		"@opentui/core": "0.5.17",
+		"@opentui/solid": "0.5.17",
+		"@types/node": "24.6.0",
+		"solid-js": "1.9.12",
+		"typescript": "5.9.3"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.5.15",
@@ -33,5 +55,13 @@
 	},
 	"allowScripts": {
 		"node@26.12.0": true
+	},
+	"exports": {
+		".": "./src/index.ts",
+		"./tui": "./tui.ts",
+		"./rpc": "./src/rpc.ts"
+	},
+	"publishConfig": {
+		"access": "public"
 	}
 }
