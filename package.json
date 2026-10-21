@@ -1,6 +1,6 @@
 {
 	"name": "@rvboris/opencode-stretch",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "cc-stretch adaptation for OpenCode 2 — inline expandable replies with read telemetry",
 	"scripts": {
 		"lint": "biome check",
