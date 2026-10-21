@@ -1,0 +1,37 @@
+{
+	"name": "opencode-stretch",
+	"version": "0.0.0-spike",
+	"description": "OpenCode 2.0.28 native stretch renderer compatibility spike",
+	"scripts": {
+		"lint": "biome check",
+		"format": "biome format --write",
+		"test": "node_modules/node/bin/node node_modules/vitest/vitest.mjs run",
+		"typecheck": "tsc --noEmit"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "MIT",
+	"type": "module",
+	"dependencies": {
+		"@opencode/plugin": "2.0.28",
+		"@opentui/core": "0.5.17",
+		"@opentui/solid": "0.5.17",
+		"@types/node": "24.6.0",
+		"solid-js": "1.9.12",
+		"typescript": "5.9.3"
+	},
+	"private": true,
+	"exports": {
+		".": "./src/index.ts",
+		"./tui": "./tui.ts",
+		"./rpc": "./src/rpc.ts"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.5.15",
+		"node": "26.12.0",
+		"vitest": "5.0.5"
+	},
+	"allowScripts": {
+		"node@26.12.0": true
+	}
+}
